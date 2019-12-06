@@ -45,7 +45,7 @@
   
   - name: Start nginx
     docker_container:
-      name: "zoid/sbtest:nginx:"
+      name: "zoid/sbtest:nginx"
       network_mode: host
       recreate: yes
       image: nginx
