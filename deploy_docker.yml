@@ -30,15 +30,19 @@
       - 5001
       - 5002
 
-  - name: prepare nginx conf
-    import_playbook: /home/jenkins/ansible/make_nginx_conf.yml
+  - name: Template nginx.conf
+    template:
+      src: nginx.conf
+      dest: nginx/nginx.conf
+    with_items:
+      - 5000
+      - 5001
+      - 5002
   
-  - name: pull and execute njinx
-    docker_container:
-      name: "nginx"
-      recreate: yes
-      network_mode: host
-      state: started
-      image: nginx:latest
-      volumes:
-       - /nginx.conf:/etc/nginx/nginx.conf:ro
+  - name: Build an image and push it to a private repo
+    docker_image:
+      build:
+        path: /home/jenkins/ansible/nginx
+      name: nginx
+      tag: latest      
+      source: build
