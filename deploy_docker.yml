@@ -40,9 +40,8 @@
       - 5002
   
   - name: Build an image and push it to a private repo
-    docker_image:
-      path: /home/jenkins/ansible/nginx
-      name: zoid/sbtest:nginx
+    shell: docker build -t zoid/sbtest:nginx
+      
   
   - name: Start nginx
     docker_container:
