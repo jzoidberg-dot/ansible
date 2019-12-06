@@ -45,6 +45,6 @@
 [servers]
 172.17.0.1
 
-[server:vars]
+[servers:vars]
 ansible_connection=ssh
 ansible_user=root
