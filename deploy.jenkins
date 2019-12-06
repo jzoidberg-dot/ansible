@@ -11,16 +11,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
-    stages {
-        stage("check env") {
-            steps{
-                sh ''' 
-                 netstat -ntlup | grep -e "500[0-3]"                 
-                 if [ "${?}" == "0" ]; then docker stop flask0 flask1 flask2 nginx; fi
-                '''
-            }
-        }
-        
+    stages {            
         stage("deploy webapp and balancer") {
 			steps{				
 					sh """
@@ -34,16 +25,16 @@ pipeline {
         }
 		
 		stage("testing if app is running") {
-            steps {
-                	script{
-                        def int ret = sh(script: 'curl -sI 192.168.0.58 | grep HTT | cut -f2 -d " " ', returnStdout: true)
-                        println ret
-                        if(ret!=200){                            
-                            currentBuild.result = 'ABORTED'
-                            error('test failed. Check app')
+            steps{
+                script{
+                    def int ret = sh(script: 'curl -sI 192.168.0.58 | grep HTT | cut -f2 -d " " ', returnStdout: true)
+                    println ret
+                    if(ret!=200){                            
+                        currentBuild.result = 'ABORTED'
+                        error('test failed. Check app')
+                    }
                 }
 			}
         }
     }
-}
 }		
