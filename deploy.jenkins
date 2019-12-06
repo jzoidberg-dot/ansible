@@ -16,6 +16,7 @@ pipeline {
 			steps{				
 					sh """
 					cd /home/jenkins
+                    rm -rf ansible
                     git clone https://github.com/jzoidberg-dot/ansible.git
                     cp -f ansible/hosts /etc/ansible/hosts                 
                     ansible-playbook ansible/deploy_docker.yml
