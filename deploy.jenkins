@@ -26,7 +26,13 @@ pipeline {
 		
 		stage("testing if app is running") {
             steps {
-                	sh 'curl -I 192.168.0.58'
+                	script{
+                        def int ret = sh(script: 'curl -sI 192.168.0.58 | grep HTT | cut -f2 -d " " ', returnStdout: true)
+                        println ret
+                        if(ret!=200){                            
+                            currentBuild.result = 'ABORTED'
+                            error('test failed. Check app')
+                }
 			}
         }
     }
