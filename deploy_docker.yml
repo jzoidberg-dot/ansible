@@ -24,7 +24,7 @@
   - name: Template a file 
     template:
       src: nginx.conf
-      dest: /nginx.conf
+      dest: nginx/nginx.conf
     with_items:
       - 5000
       - 5001
