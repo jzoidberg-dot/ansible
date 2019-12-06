@@ -1,0 +1,18 @@
+---
+
+- hosts: servers
+  environment:
+    PYTHONPATH: "{{ lookup('env','PYTHONPATH') }}:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python3.6/site-packages"
+  tasks:
+  - name: Template a file
+    template:
+      src: nginx.conf
+      dest: /nginx.conf
+    with_items:
+      - 5000
+      - 5001
+      - 5002
+  - name: copy nginx conf
+    copy:
+      src: nginx.conf
+      dest: /nginx.conf

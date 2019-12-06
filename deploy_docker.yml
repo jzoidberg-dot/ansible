@@ -30,7 +30,9 @@
       - 5001
       - 5002
 
-
+  - name: prepare nginx conf
+    import_playbook: /home/jenkins/ansible/make_nginx_conf.yml
+  
   - name: pull and execute njinx
     docker_container:
       name: "nginx"
