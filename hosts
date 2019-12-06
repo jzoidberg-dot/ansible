@@ -43,7 +43,7 @@
 ## db-[99:101]-node.example.com
 
 [servers]
-172.17.0.1
+192.168.0.58
 
 [servers:vars]
 ansible_connection=ssh
