@@ -16,7 +16,7 @@ pipeline {
             steps{
                 sh ''' 
                  netstat -ntlup | grep -e "500[0-3]"                 
-                 if [ "${?}" == "0" ]; then echo "ports are in use" &&  exit 1; fi
+                 if [ "${?}" == "0" ]; then docker stop flask0 flask1 flask2 nginx; fi
                 '''
             }
         }
