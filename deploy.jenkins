@@ -14,12 +14,15 @@ pipeline {
     stages {
         stage("deploy webapp and balancer") {
 			steps{
-				
+				dir ('/home/jenkins') {
 					sh """
-					ansible-playbook deploy_docker.yml
+					git clone https://github.com/jzoidberg-dot/ansible.git
+                    cp -f ansible/hosts /etc/ansible/hosts                 
+                    ansible-playbook ansible/deploy_docker.yml
 					"""
 				}
 			}
+        }
 		
 		stage("testing if app is running") {
             steps {
@@ -28,4 +31,3 @@ pipeline {
         }
     }
 }		
-
