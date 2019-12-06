@@ -12,6 +12,15 @@ pipeline {
         timestamps()
     }
     stages {
+        stage("check env") {
+            steps{
+                sh ''' 
+                 netstat -ntlup | grep -e "500[0-3]"                 
+                 if [ "${?}" == "0" ]; then echo "ports are in use" &&  exit 1; fi
+                '''
+            }
+        }
+        
         stage("deploy webapp and balancer") {
 			steps{				
 					sh """
