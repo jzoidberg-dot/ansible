@@ -41,8 +41,6 @@
   
   - name: Build an image and push it to a private repo
     docker_image:
-      build:
-        path: /home/jenkins/ansible/nginx
+      path: /home/jenkins/ansible/nginx
       name: nginx
       tag: latest      
-      source: build
