@@ -1,6 +1,7 @@
 ---
 
 - hosts: servers  
+  connection: local
   environment:
     PYTHONPATH: "{{ lookup('env','PYTHONPATH') }}:/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python3.6/site-packages"
 
