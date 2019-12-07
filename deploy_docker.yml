@@ -39,7 +39,7 @@
       - 5001
       - 5002
   
-  - name: Build an image and push it to a private repo
+  - name: Build nginx image
     shell: docker build -t zoid/sbtest:nginx /home/jenkins/ansible/nginx
       
   
